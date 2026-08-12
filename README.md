@@ -9,7 +9,7 @@ Prosto（Prosto+）是一个轻量的脚本式编程语言解释器与交互式�
 已编译发布
 ----
 Windows 二进制（zip 包，包含 prosto.exe）：
-https://github.com/Everechnology/Prosto/releases/download/Releses/prosto.zip
+[Download Prosto.Zip](https://github.com/Everechnology/Prosto/releases/download/Release/prosto_2026-08-12.zip)
 
 快速开始（下载并运行）
 -------------------
