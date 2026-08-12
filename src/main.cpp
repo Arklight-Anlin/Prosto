@@ -47,8 +47,9 @@ static bool startsWithSkipKeyword(const std::string& s) {
 }
 
 void repl(Interpreter& interp) {
-    std::cout << "Prosto+ v1.0.0 — Interactive REPL\n";
+    std::cout << "Prosto+ v1.0.0 - Interactive REPL\n";
     std::cout << "Commands: exit | vars | funcs | help\n\n";
+    std::cout.flush();
 
     std::vector<std::string> buffer;
     int braceDepth = 0;

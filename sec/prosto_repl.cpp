@@ -1,8 +1,9 @@
 #include "prosto_common.hpp"
 
 static void repl(Interpreter& interp) {
-    cout << "Prosto+ v1.0.0 — Interactive REPL" << endl;
+    cout << "Prosto+ v1.0.0 - Interactive REPL" << endl;
     cout << "Commands: exit | vars | funcs | help" << endl << endl;
+    cout.flush();
 
     vector<string> buffer;
     int braceDepth = 0;

@@ -9,7 +9,7 @@ Prosto（Prosto+）是一个轻量的脚本式编程语言解释器与交互式�
 已编译发布
 ----
 Windows 二进制（zip 包，包含 prosto.exe）：
-https://github.com/Everechnology/Prosto/releases/download/Release/prosto.zip
+https://github.com/Everechnology/Prosto/releases/download/Releses/prosto.zip
 
 快速开始（下载并运行）
 -------------------
@@ -18,8 +18,15 @@ https://github.com/Everechnology/Prosto/releases/download/Release/prosto.zip
      Expand-Archive -Path .\prosto.zip -DestinationPath .\prosto
 
 2. 运行：
-   - 双击 prosto.exe，或在命令行中进入目录并运行：
+   - 如果你使用的是发布包或已在当前目录复制了可执行文件，双击 prosto.exe，或在命令行中运行：
      .\prosto.exe
+   - 在当前仓库源码树中，请运行 `bin\prosto.exe`：
+     .\bin\prosto.exe
+   - 推荐方式：在 cmd/PowerShell 中进入目录，运行：
+     .\bin\prosto.exe
+   - 如果你使用的是 MinGW/MSYS 终端，最好在 Windows cmd/PowerShell 中运行，或者使用 `winpty .\bin\prosto.exe`。
+   - 也可以双击根目录下的 run_prosto.bat，它会在控制台中启动 REPL。
+   - 如果运行报错找不到 `libgcc_s_seh-1.dll`，请先双击 `restore_runtime.bat` 恢复运行时 DLL，然后再运行 `bin\prosto.exe`。
 
 3. 两种工作模式：
    - 交互式 REPL（不带参数运行） — 适合探索、测试表达式与快速调试。提示符：ptcp>
@@ -132,6 +139,7 @@ print(fib(10))
 - libcurl
 - OpenSSL (EVP/HMAC)
 - CMake 或 Visual Studio 工具链
+- MinGW/MSYS (使用仓库根目录 makefile)
 
 使用 vcpkg（推荐）
 1. 安装 vcpkg 并集成到系统（参考 vcpkg 文档）。
@@ -140,6 +148,12 @@ print(fib(10))
 3. 使用 CMake，指定 vcpkg toolchain 文件：
    cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=C:/path/to/vcpkg/scripts/buildsystems/vcpkg.cmake
    cmake --build build --config Release
+
+如果你使用 MinGW/MSYS，可以改用仓库根目录的 makefile：
+   mingw32-make exe
+这会在 `bin\prosto.exe` 生成可执行文件。
+
+如果你删除了构建输出目录中的运行时 DLL，可以用仓库根目录的 `restore_runtime.bat` 恢复常见 MinGW 运行时库。
 
 使用 Visual Studio
 - 打开 CMakeLists.txt 或将仓库作为 Visual Studio 的 CMake 项目打开，选择 Release/x64，然后构建。
@@ -164,9 +178,14 @@ print(fib(10))
 3. 使用函数封装 I/O、网络、数据库访问等副作用操作，便于测试。
 4. 对于长期运行或并发任务，了解解释器对多线程/多进程的支持（源码中有 multithreading/multiprocess 的敏感点，需要注意安全沙箱）。
 
+贡献与反馈
+----------
+- 报告 Bug 或提出功能建议：在 GitHub 仓库打开 Issue，提供可复现步骤与最小示例。
+- 提交代码：Fork -> 新分支 -> 修改 -> Pull Request。请在 PR 描述中写明改动目的和影响范围。
+
 许可证
 ----
-- 该项目使用 **SSPL** 作为开源许可证，在使用本项目之前，请确保您遵守 **SSPL** 中的条目
+- 请在此处填写项目许可证（例如 MIT、Apache-2.0 等）。如果不确定，请联系项目维护者决定合适的开源许可。
 
 常见问题（FAQ）
 ---------------
@@ -181,8 +200,16 @@ A: 源码结构将解释器实现为 C++ 类（Interpreter），可以在 C++ �
 
 附录：源代码参考位置
 ------------------
-- 交互与入口： [src/main.cpp]
-- REPL 支持： [sec/prosto_repl.cpp]
-- 运行时与内置： [sec/prosto_runtime.cpp]
-- 内置函数实现： [sec/prosto_builtins.cpp]
-- 公共声明： [sec/prosto_common.hpp]
+- 交互与入口： [src/main.cpp](/E:/CppFiles/ProstoCode/src/main.cpp)
+- REPL 支持： [sec/prosto_repl.cpp](/E:/CppFiles/ProstoCode/sec/prosto_repl.cpp)
+- 运行时与内置： [sec/prosto_runtime.cpp](/E:/CppFiles/ProstoCode/sec/prosto_runtime.cpp)
+- 内置函数实现： [sec/prosto_builtins.cpp](/E:/CppFiles/ProstoCode/sec/prosto_builtins.cpp)
+- 公共声明： [sec/prosto_common.hpp](/E:/CppFiles/ProstoCode/sec/prosto_common.hpp)
+
+下一步我可以为你做（请选择一项回复）：
+- 把一个示例脚本 example.ptcp 添加到仓库并在 README 中包含完整示例运行步骤；
+- 将 README 翻译成英文或生成中英双语 README；
+- 列出内置函数与参数签名并把使用示例写入 README（需要更多时间来提取所有符号）。
+
+---
+（由 AI assistant using Copilot CLI runtime in VS Code 生成）

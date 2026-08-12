@@ -47,9 +47,10 @@ DEPS = $(CPP_OBJECTS:.o=.d) $(C_OBJECTS:.o=.d)
 DLL_NAME = libprosto.dll
 STATIC_LIB_NAME = libprosto.a
 IMPORT_LIB_NAME = libprosto.dll.a
+EXE_NAME = prosto.exe
 
 # 默认目标
-all: $(OUT_DIR)/$(DLL_NAME) $(OUT_DIR)/$(STATIC_LIB_NAME)
+all: exe
 
 # 编译 DLL
 $(OUT_DIR)/$(DLL_NAME): $(CPP_OBJECTS) $(C_OBJECTS)
@@ -74,13 +75,13 @@ $(OUT_DIR)/%.o: $(SRC_DIR)/%.c
 
 # 单独编译 main.cpp 为可执行文件（如果需要）
 exe: $(OUT_DIR)/$(DLL_NAME)
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $(OUT_DIR)/prostop.exe $(SRC_DIR)/main.cpp $(CPP_OBJECTS) $(C_OBJECTS) $(LIBS)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $(OUT_DIR)/$(EXE_NAME) $(SRC_DIR)/main.cpp $(CPP_OBJECTS) $(C_OBJECTS) $(LIBS)
 
 # dist: 准备发布目录，复制可执行和 DLL 以及必要的 MinGW 运行时 DLL
 dist: exe
 	$(shell mkdir -p $(DIST_DIR) 2>nul || cmd /c "mkdir $(DIST_DIR)" 2>nul)
 	# 复制主程序和库
-	cp $(OUT_DIR)/prostop.exe $(DIST_DIR)/ 2>nul || cmd /c "copy $(OUT_DIR)\\prostop.exe $(DIST_DIR)\\"
+	cp $(OUT_DIR)/$(EXE_NAME) $(DIST_DIR)/ 2>nul || cmd /c "copy $(OUT_DIR)\\$(EXE_NAME) $(DIST_DIR)\\" 
 	cp $(OUT_DIR)/$(DLL_NAME) $(DIST_DIR)/ 2>nul || cmd /c "copy $(OUT_DIR)\\$(DLL_NAME) $(DIST_DIR)\\"
 	# 常见的 MinGW 运行时 DLL（按需复制）
 	# 优先从 MSYS2 mingw64/bin 复制，若不存在则尝试 cmd copy（Windows 路径）

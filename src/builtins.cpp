@@ -92,6 +92,7 @@ void Interpreter::registerBuiltins() {
             cout << args[i].toStr();
         }
         cout << end;
+        cout.flush();
         return Value();
     }, "print");
 

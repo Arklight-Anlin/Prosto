@@ -43,10 +43,11 @@ if(WIN32)
 endif()
 
 # ---------------------------------------------------------------------------
-# prosto_cli.exe — standalone REPL / script runner
+# prosto.exe — standalone REPL / script runner
 # ---------------------------------------------------------------------------
 add_executable(prosto_cli src/main.cpp)
 target_link_libraries(prosto_cli PRIVATE prosto_core)
+set_target_properties(prosto_cli PROPERTIES OUTPUT_NAME "prosto" WIN32_EXECUTABLE OFF)
 
 # ---------------------------------------------------------------------------
 # Install
